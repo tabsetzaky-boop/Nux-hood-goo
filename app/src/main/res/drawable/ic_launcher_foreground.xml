@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- Soft center halo -->
+    <path
+        android:fillColor="#260A84FF"
+        android:pathData="M54,54m-24,0a24,24 0,1 1,48 0a24,24 0,1 1,-48 0" />
+
+    <!-- Orbit 1 (horizontal tilted 0 deg) -->
+    <group
+        android:pivotX="54"
+        android:pivotY="54"
+        android:rotation="0">
+        <path
+            android:fillColor="#00000000"
+            android:pathData="M54,43A26,11 0 1,1 53.99,43Z"
+            android:strokeWidth="3.2"
+            android:strokeColor="#5CB3FF" />
+    </group>
+
+    <!-- Orbit 2 (+60 deg) -->
+    <group
+        android:pivotX="54"
+        android:pivotY="54"
+        android:rotation="60">
+        <path
+            android:fillColor="#00000000"
+            android:pathData="M54,43A26,11 0 1,1 53.99,43Z"
+            android:strokeWidth="3.2"
+            android:strokeColor="#2F6BFF" />
+    </group>
+
+    <!-- Orbit 3 (-60 deg) -->
+    <group
+        android:pivotX="54"
+        android:pivotY="54"
+        android:rotation="-60">
+        <path
+            android:fillColor="#00000000"
+            android:pathData="M54,43A26,11 0 1,1 53.99,43Z"
+            android:strokeWidth="3.2"
+            android:strokeColor="#8B5CF6" />
+    </group>
+
+    <!-- Core nucleus -->
+    <path
+        android:fillColor="#0A84FF"
+        android:pathData="M54,54m-7.5,0a7.5,7.5 0,1 1,15 0a7.5,7.5 0,1 1,-15 0" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M54,54m-4.2,0a4.2,4.2 0,1 1,8.4 0a4.2,4.2 0,1 1,-8.4 0" />
+
+    <!-- 3 orbiting electrons -->
+    <path
+        android:fillColor="#5CB3FF"
+        android:pathData="M80,54m-3.2,0a3.2,3.2 0,1 1,6.4 0a3.2,3.2 0,1 1,-6.4 0" />
+    <path
+        android:fillColor="#C4A6FF"
+        android:pathData="M41,31.5m-3.2,0a3.2,3.2 0,1 1,6.4 0a3.2,3.2 0,1 1,-6.4 0" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M41,76.5m-3.2,0a3.2,3.2 0,1 1,6.4 0a3.2,3.2 0,1 1,-6.4 0" />
+</vector>

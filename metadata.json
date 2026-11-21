@@ -1,0 +1,6 @@
+{
+  "name": "Nux · نوكس",
+  "description": "مساعد ذكاء اصطناعي متعدد اللغات للدردشة، التفكير العميق، البحث، إنشاء الصور، الصوت، المشاريع، وبناء المواقع والتطبيقات.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

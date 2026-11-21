@@ -1,0 +1,230 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Authenticated user profile, onboarding preferences, and personalization settings.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "Firebase Auth UID" },
+        "displayName": { "type": "string", "description": "User full display name" },
+        "email": { "type": "string", "description": "User email address" },
+        "photoUrl": { "type": "string", "description": "Optional profile avatar URL" },
+        "preferredName": { "type": "string", "description": "Preferred name Nux calls the user" },
+        "customInstructions": { "type": "string", "description": "Personal system instructions up to 2000 chars" },
+        "gender": { "type": "string", "description": "male, female, or unspecified" },
+        "age": { "type": "integer", "description": "User age between 16 and 100" },
+        "liveVoice": { "type": "string", "description": "Selected Gemini live voice name" },
+        "profileCompleted": { "type": "boolean", "description": "Whether onboarding is complete" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Server timestamp" },
+        "updatedAt": { "type": "string", "format": "date-time", "description": "Server timestamp" }
+      },
+      "required": ["userId", "displayName", "email", "profileCompleted", "createdAt", "updatedAt"]
+    },
+    "Conversation": {
+      "title": "Conversation",
+      "description": "A user chat thread with pinning, archiving, locking, and project linkage.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "title": { "type": "string" },
+        "pinned": { "type": "boolean" },
+        "archived": { "type": "boolean" },
+        "locked": { "type": "boolean" },
+        "projectId": { "type": "string" },
+        "modelName": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "title", "pinned", "archived", "locked", "modelName", "createdAt", "updatedAt"]
+    },
+    "ChatMessage": {
+      "title": "ChatMessage",
+      "description": "Individual user or assistant message inside a conversation.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "conversationId": { "type": "string" },
+        "role": { "type": "string", "enum": ["user", "assistant"] },
+        "content": { "type": "string" },
+        "thinking": { "type": "string" },
+        "sources": { "type": "array" },
+        "model": { "type": "string" },
+        "attachmentNames": { "type": "array" },
+        "imageLocalPaths": { "type": "array" },
+        "audioTranscript": { "type": "string" },
+        "feedback": { "type": "string" },
+        "feedbackNote": { "type": "string" },
+        "followUpSuggestions": { "type": "array" },
+        "webSearch": { "type": "boolean" },
+        "errorFlag": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "conversationId", "role", "content", "webSearch", "errorFlag", "createdAt", "updatedAt"]
+    },
+    "Project": {
+      "title": "Project",
+      "description": "Dedicated workspace with custom instructions and optional build metadata.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "name": { "type": "string" },
+        "iconEmoji": { "type": "string" },
+        "description": { "type": "string" },
+        "instructions": { "type": "string" },
+        "pinned": { "type": "boolean" },
+        "buildKind": { "type": "string" },
+        "appName": { "type": "string" },
+        "packageName": { "type": "string" },
+        "permissions": { "type": "array" },
+        "features": { "type": "array" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "name", "iconEmoji", "description", "instructions", "pinned", "buildKind", "createdAt", "updatedAt"]
+    },
+    "MemoryItem": {
+      "title": "MemoryItem",
+      "description": "User-authored memory fact injected into Gemini context when enabled.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "content": { "type": "string" },
+        "category": { "type": "string", "enum": ["شخصي", "تفضيلات", "عمل", "أخرى"] },
+        "enabled": { "type": "boolean" },
+        "source": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "content", "category", "enabled", "source", "createdAt", "updatedAt"]
+    },
+    "GeneratedImage": {
+      "title": "GeneratedImage",
+      "description": "Metadata for AI-generated images stored locally in app files.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "prompt": { "type": "string" },
+        "aspectRatio": { "type": "string" },
+        "style": { "type": "string" },
+        "model": { "type": "string" },
+        "localFileName": { "type": "string" },
+        "conversationId": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "prompt", "aspectRatio", "style", "model", "localFileName", "createdAt", "updatedAt"]
+    },
+    "SiteBuild": {
+      "title": "SiteBuild",
+      "description": "Single-file HTML website created in the Nux Site Builder.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "prompt": { "type": "string" },
+        "htmlCode": { "type": "string" },
+        "published": { "type": "boolean" },
+        "versionCount": { "type": "integer" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "title", "description", "prompt", "htmlCode", "published", "versionCount", "createdAt", "updatedAt"]
+    },
+    "NativeApp": {
+      "title": "NativeApp",
+      "description": "Android app architecture and specification planned in APK Studio.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "name": { "type": "string" },
+        "idea": { "type": "string" },
+        "packageName": { "type": "string" },
+        "status": { "type": "string" },
+        "specSummary": { "type": "string" },
+        "permissions": { "type": "array" },
+        "features": { "type": "array" },
+        "secretKeys": { "type": "array" },
+        "versionName": { "type": "string" },
+        "versionCode": { "type": "integer" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "name", "idea", "packageName", "status", "specSummary", "permissions", "features", "secretKeys", "versionName", "versionCode", "createdAt", "updatedAt"]
+    },
+    "SecurityPin": {
+      "title": "SecurityPin",
+      "description": "Salted SHA-256 PIN hash for login 2-step or locked chats.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "kind": { "type": "string", "enum": ["login", "chats"] },
+        "pinHash": { "type": "string" },
+        "salt": { "type": "string" },
+        "enabled": { "type": "boolean" },
+        "trustedDevices": { "type": "array" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "kind", "pinHash", "salt", "enabled", "trustedDevices", "createdAt", "updatedAt"]
+    },
+    "ResponseFeedback": {
+      "title": "ResponseFeedback",
+      "description": "User rating and optional note on an assistant response.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "messageId": { "type": "string" },
+        "conversationId": { "type": "string" },
+        "rating": { "type": "string", "enum": ["up", "down"] },
+        "note": { "type": "string" },
+        "model": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "messageId", "conversationId", "rating", "note", "model", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserProfile" },
+      "description": "Per-user profile and customization settings."
+    },
+    "/users/{userId}/conversations/{conversationId}": {
+      "schema": { "$ref": "#/entities/Conversation" },
+      "description": "User conversations."
+    },
+    "/users/{userId}/conversations/{conversationId}/messages/{messageId}": {
+      "schema": { "$ref": "#/entities/ChatMessage" },
+      "description": "Messages belonging to a conversation."
+    },
+    "/users/{userId}/projects/{projectId}": {
+      "schema": { "$ref": "#/entities/Project" },
+      "description": "User workspace projects."
+    },
+    "/users/{userId}/memory/{memoryId}": {
+      "schema": { "$ref": "#/entities/MemoryItem" },
+      "description": "User personal memory items."
+    },
+    "/users/{userId}/generated_images/{imageId}": {
+      "schema": { "$ref": "#/entities/GeneratedImage" },
+      "description": "Generated image studio records."
+    },
+    "/users/{userId}/site_builds/{siteId}": {
+      "schema": { "$ref": "#/entities/SiteBuild" },
+      "description": "Websites created in the site builder."
+    },
+    "/users/{userId}/native_apps/{appId}": {
+      "schema": { "$ref": "#/entities/NativeApp" },
+      "description": "Android app specs created in APK Studio."
+    },
+    "/users/{userId}/security/{docId}": {
+      "schema": { "$ref": "#/entities/SecurityPin" },
+      "description": "Hashed PIN configurations for login and locked chats."
+    },
+    "/users/{userId}/feedback/{feedbackId}": {
+      "schema": { "$ref": "#/entities/ResponseFeedback" },
+      "description": "User feedback records for assistant replies."
+    }
+  }
+}
